@@ -37,9 +37,9 @@ def news_title_generator(keyword):
     return title_list
 
 
-def strip_media_title(news_list):
+def strip_media_name(news_list):
     """
-    strip media title from news title
+    strip media name from news title
 
     args:
         list of str
@@ -48,8 +48,8 @@ def strip_media_title(news_list):
     """
     raw_title_df = pd.DataFrame(news_list)
     intermediate_df = raw_title_df[0].str.split(' - ', expand=True)
-    title_list = intermediate_df[0]
-    return title_list
+    title_list_with_no_media_name = intermediate_df[0]
+    return title_list_with_no_media_name
 
 
 def _counter(title_list):
@@ -112,6 +112,6 @@ def start():
             '任意のキーワードをどうぞ。\n' +
             '最新100件のニュースタイトルでこのキーワードと一緒に出てくる単語をワードクラウドにします。\n')
         title_list_and_medianame = news_title_generator(keyword)
-        title_list = strip_media_title(title_list_and_medianame)
+        title_list = strip_media_name(title_list_and_medianame)
         word_clouder(title_list, keyword)
         break
